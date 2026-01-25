@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shwetank Agrawal | Research & Engineering Portfolio</title>
-   <meta name="description" content="ATS-optimized professional resume website showcasing education, experience, projects, research, publications, and achievements" />
+     <meta name="description" content="ATS-optimized professional resume website showcasing education, experience, projects, research, publications, and achievements" />
   <meta name="keywords" content="resume, portfolio, power system engineer, control engineer, researcher, projects, internships, industry experience, publications" />
   <style>
     :root {
@@ -22,21 +22,25 @@
     body { margin: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding-top: 56px; }
     
     .topbar { height: 56px; background: var(--primary); color: #fff; display: flex; align-items: center; padding: 0 1.5rem; font-weight: 700; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
+    
+    /* Added for mobile friendliness */
+    .menu-toggle { display: none; background: rgba(255,255,255,0.2); border: 1px solid #fff; color: #fff; padding: 4px 8px; border-radius: 4px; cursor: pointer; margin-right: 10px; font-size: 0.8rem; }
+
     .layout { display: grid; grid-template-columns: 260px 1fr; min-height: calc(100vh - 56px); }
     
-    .sidebar { background: var(--sidebar); color: #e5e7eb; padding: 1.5rem 1rem; position: sticky; top: 56px; height: calc(100vh - 56px); overflow-y: auto; }
+    .sidebar { background: var(--sidebar); color: #e5e7eb; padding: 1.5rem 1rem; position: sticky; top: 56px; height: calc(100vh - 56px); overflow-y: auto; transition: 0.3s ease; }
     .sidebar a { display: block; padding: 0.7rem 1rem; border-radius: 8px; color: #9ca3af; text-decoration: none; font-size: 0.9rem; margin-bottom: 0.25rem; }
     .sidebar a:hover { background: #1e293b; color: #fff; }
 
-    .content { padding: 2rem; max-width: 1200px; margin: 0 auto; }
+    .content { padding: 2rem; max-width: 1200px; margin: 0 auto; width: 100%; overflow-x: hidden; }
 
     header { display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; background: var(--card); padding: 2.5rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); margin-bottom: 2rem; }
     .profile-pic { width: 130px; height: 130px; border-radius: 16px; object-fit: cover; border: 2px solid #e5e7eb; }
     .header-info { flex: 1; min-width: 300px; }
     .name { font-size: 2.4rem; font-weight: 800; margin: 0; color: var(--sidebar); }
-    .badge { background: #e0e7ff; color: #1e3a8a; padding: 0.3rem 0.7rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; margin-right: 5px; }
+    .badge { background: #e0e7ff; color: #1e3a8a; padding: 0.3rem 0.7rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; margin-right: 5px; display: inline-block; margin-top: 5px; }
     
-    .links { margin-top: 20px; display: flex; gap: 12px; }
+    .links { margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap; }
     .btn { text-decoration: none; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 600; font-size: 0.85rem; border: 1px solid #d1d5db; color: var(--text); }
     .btn-primary { background: var(--primary); color: #fff; border: none; }
 
@@ -45,7 +49,7 @@
     .section-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; border-left: 4px solid var(--primary); padding-left: 12px; }
 
     /* --- TIMELINE FIX: Continuous Scrolling Line --- */
-    .timeline-container { position: relative; overflow-x: auto; padding: 2rem 0; width: 100%; }
+    .timeline-container { position: relative; overflow-x: auto; padding: 2rem 0; width: 100%; -webkit-overflow-scrolling: touch; }
     .timeline-wrapper { 
       display: inline-flex; 
       position: relative; 
@@ -87,15 +91,22 @@
 
     @media (max-width: 900px) {
       .layout { grid-template-columns: 1fr; }
-      .sidebar { display: none; }
+      .menu-toggle { display: block; }
+      .sidebar { position: fixed; left: -260px; z-index: 999; width: 260px; }
+      .sidebar.active { left: 0; }
       .timeline-wrapper { display: flex; flex-direction: column; }
       .timeline-wrapper::before { left: 18px; top: 0; width: 4px; height: 100%; }
       .timeline-event { width: 100%; text-align: left; margin-left: 45px; margin-bottom: 2rem; }
       .timeline-icon { position: absolute; left: -45px; top: 0; margin: 0; }
+      header { padding: 1.5rem; text-align: center; justify-content: center; }
+      .profile-pic { margin-bottom: 1rem; }
+      .name { font-size: 1.8rem; }
+      .links { justify-content: center; }
+      .contact-box { margin-top: 20px; }
+      .topbar { font-size: 0.8rem; padding: 0 0.8rem; }
     }
 	
 	.tagline { color: var(--muted); }
-	
 	
 	/* Figure Style Entry (Industry & Education) */
     .entry-title { font-size: 1.25rem; font-weight: 700; color: #000; margin-top: 1.5rem; margin-bottom: 4px; }
@@ -107,7 +118,6 @@
     .check-list li::before { content: '✔'; position: absolute; left: 0; color: var(--success); font-weight: 900; }
 	
 	 a { color: var(--accent); text-decoration: none; }
-	
 	
 	.qr-footer {
   margin-top: 1.5rem;
@@ -130,7 +140,6 @@
   font-size: 0.75rem;
   color: var(--muted);
 }
-
 	
 	/* ===== Contact Form */
 	.contact-btn {
@@ -172,38 +181,32 @@
   cursor: pointer;
   padding: 0 8px;
 }
-
-	
-	
-	
   </style>
 </head>
 <body id="top">
 
-  <!--<div class="topbar"><a href="#top" style="color:#fff; text-decoration:none;">Shwetank Agrawal | Digital Professional Portfolio</a></div>-->
   <div class="topbar">
+      <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
 	  <a href="#top" style="color:#fff; text-decoration:none;">
 		Shwetank Agrawal | Digital Professional Portfolio
 	  </a>
 	  <button class="contact-btn" onclick="openContact()">Contact Me</button>
   </div>
 
-  
-
   <div class="layout">
-    <aside class="sidebar">
-      <a href="#top">About Me</a>
-      <a href="#timeline">Career Timeline</a>
-      <a href="#education">Education</a>
-      <a href="#experience">Experience</a>
-	  <a href="#training">Training</a>
-	  <a href="#projects">Projects</a>
-	  <a href="#research">Ph.D. Work</a>
-      <a href="#publications">Publications</a>
-      <a href="#awards">Awards</a>
-      <a href="#skills">Technical Skills</a>
-	  <a href="#leadership">Entrepreneurial Leadership</a>
-	  <a href="#links">Open-Source</a>
+    <aside class="sidebar" id="sidebar">
+      <a href="#top" onclick="toggleSidebar()">About Me</a>
+      <a href="#timeline" onclick="toggleSidebar()">Career Timeline</a>
+      <a href="#education" onclick="toggleSidebar()">Education</a>
+      <a href="#experience" onclick="toggleSidebar()">Experience</a>
+	  <a href="#training" onclick="toggleSidebar()">Training</a>
+	  <a href="#projects" onclick="toggleSidebar()">Projects</a>
+	  <a href="#research" onclick="toggleSidebar()">Ph.D. Work</a>
+      <a href="#publications" onclick="toggleSidebar()">Publications</a>
+      <a href="#awards" onclick="toggleSidebar()">Awards</a>
+      <a href="#skills" onclick="toggleSidebar()">Technical Skills</a>
+	  <a href="#leadership" onclick="toggleSidebar()">Entrepreneurial Leadership</a>
+	  <a href="#links" onclick="toggleSidebar()">Open-Source</a>
     </aside>
 
     <main class="content">
@@ -230,8 +233,6 @@
         <div class="card">
           <div class="section-title">About Me</div>
           <p>Area of interest in power electronics converter design, microgrid operation and control, and renewable energy integration. My doctoral work focuses on virtual synchronous generator (VSG) based control for DERs in hybrid microgrids. Research interests include grid-forming, grid-feeding and grid-supporting inverter control, stability analysis, automatic generation control, and wind/solar energy systems. Hands-on experience with OPAL-RT real-time simulation, SIL/CHIL validation, and embedded controller implementation. Experienced in industry-oriented R&D through GE Vernova Advanced Research Center and DST-sponsored projects. My background includes a mix of academic rigor, industrial, and leadership.</p>
-        
-     
 		</div>
       </section>
 
@@ -299,11 +300,9 @@
           <div class="entry-title">B.Tech (Electrical Engineering)</div>
           <div class="entry-meta">NIT Rourkela · 2009 – 2013 || CGPA: 8.66/10</div>
           <div><span class="entry-label">B.Tech Project:</span> Load Flow Solution for Meshed Distribution Networks</div>
-         
         </div>
       </section>
 
- <!-- Industry Experience -->
     <section id="experience">
         <div class="card">
           <div class="section-title">Industry Experience <div class="entry-label">1 Year, 3 Months</div></div>
@@ -327,7 +326,6 @@
         </div>
       </section>
 
- <!-- Internships & Courses -->
     <section id="training">
       <div class="card">
         <div class="section-title">Training</div>
@@ -343,11 +341,9 @@
 		  <div class="entry-title">Industrial Automation using PLC</div>
           <div class="entry-meta">Central Tool Room & Training Centre (CTTC), Bhubaneswar || May 2011</div>
           <div><span class="entry-label">Summer Training:</span> Traning on PLC programming and interloack study</div>
-       
       </div>
     </section>
 
-    <!-- Projects -->
     <section id="projects">
       <div class="card">
         <div class="section-title">Projects</div>
@@ -370,11 +366,9 @@
             <li>Design and implementation of power electronic converters.</li>
             <li>Installation, integration, and testing of electrical components and subsystems.</li>
 		</ul>
-        
       </div>
     </section>
 
-    <!-- PhD Work -->
     <section id="research">
       <div class="card">
         <div class="section-title">Ph.D. Research Work</div>
@@ -391,7 +385,7 @@
 		<div class="entry-title">Centralized Control of Hybrid Microgrid</div>
 		<ul class="check-list">
 			<li>Modeling and stability of generalized hybrid Microgrid with hierarchical control consisting of primary and secondary control.</li>
-			<li>Primary control includes the droop control whereas the secondary control includes centralized control for frequency and PCC bus voltages restoration. </li>
+			<li>Primary control includes the droop control whereas the secondary control includes centralized control for frequency and PCC bus voltages restoration.</li>
 			<li>Validation of the control through simulation and verification with CHIL along with use of UART protocol for communication.</li>
 		</ul>
 
@@ -412,26 +406,17 @@
 			<li>An effective way of tracking the global maximum power point (GMPP) tracking under partial shading condition and verification through MATLAB simulation.</li>
 			<li>The improvements are performed by identifying the GMPP region in Solar PV characteristics.</li>
 		</ul>
-      
       </div>
     </section>
-
-
-
-
 
       <section id="publications">
         <div class="card">
           <div class="section-title">Publications</div>
           <h4>Journals/Transactions</h4>
 			<ul>
-			
 			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/TIA.2025.3584037" target="_blank">"Enhancing Transient Response of Grid Connected DFIG-WT Through Adaptive Inertia and Damping Control With Virtual Synchronous,"</a> in<em> IEEE Transactions on Industry Applications</em>, vol. 62, no. 1, pp. 110-119, Jan.-Feb. 2026.</li>
 			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/TIA.2025.3546205" target="_blank">"Operation and Control of Parallel-Operated Interlinking Converter in Hybrid Microgrid,"</a> in <em>IEEE Transactions on Industry Applications</em>, vol. 61, no. 4, pp. 5660-5669, July-Aug. 2025.</li>
 			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/TIA.2023.3320120" target="_blank">"Digital Controller Design and Implementation for AC and DC Side of 3ph qZSI,"</a> in <em>IEEE Transactions on Industry Applications</em>, vol. 60, no. 1, pp. 672-683, Jan.-Feb. 2024.</li>
-
-			
-	 
 			</ul>
 			<h4>Conferences</h4>
 			<ul>
@@ -439,16 +424,14 @@
 			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/ISGTEUROPE62998.2024.10863266" target="_blank">"Interlinking Converter Operation with Enhanced Hybrid and Inverse Q–V Droop,"</a> <em>2024 IEEE PES Innovative Smart Grid Technologies Europe (ISGT EUROPE)</em>, Dubrovnik, Croatia, 2024, pp. 1-5.</li>
 			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/PESGM51994.2024.10689033" target="_blank">"Enhancing Frequency Regulation in DFIG-Based Wind Turbines with FO-VSG,"</a> <em>2024 IEEE Power & Energy Society General Meeting (PESGM)</em>, Seattle, WA, USA, 2024, pp. 1-5.</li>
 			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/ETFG55873.2023.10407858" target="_blank">"Enhancing Grid Stability through Adaptive Damping and Inertia Control in DFIG-Based Wind Turbines with VSync,"</a> <em>2023 IEEE International Conference on Energy Technologies for Future Grids (ETFG)</em>, Wollongong, Australia, 2023, pp. 1-5.</li>
-			  <li>S. Agrawal, U. Malik, Y. Tripathy, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/PESGM52003.2023.10252681" target="_blank">"Distributed Multi-objective Control of Hybrid Microgrid in Autonomous Mode,"</a> <em>2023 IEEE Power & Energy Society General Meeting (PESGM)</em>, Orlando, FL, USA, 2023, pp. 1-5.</li>
-			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/PEDES56012.2022.10080482" target="_blank">"Interlinking Converter Operation in Hybrid Microgrid As a Tie-line,"</a> <em>2022 IEEE International Conference on Power Electronics, Drives and Energy Systems (PEDES)</em>, Jaipur, India, 2022, pp. 1-6.</li>
-			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/PESGRE52268.2022.9715796" target="_blank">"3ph qZSI Controller Design using PI for DC side and PR for AC side Controller including Droop Characteristic in standalone mode,"</a> <em>2022 IEEE International Conference on Power Electronics, Smart Grid, and Renewable Energy (PESGRE)</em>, Trivandrum, India, 2022, pp. 1-6.</li>
-			  <li>S. Agrawal, B. Tyagi, V. Kumar, P. Agarwal and P. Sharma, <a href="https://doi.org/10.1109/NAPS46351.2019.9000295" target="_blank">"A Simplified and Effective GMPP Tracking Algorithm for Solar Photovoltaic System,"</a> <em>2019 North American Power Symposium (NAPS)</em>, Wichita, KS, USA, 2019, pp. 1-6.</li>
+			  <li>S. Agrawal, U. Malik, Y. Tripathy, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/PESGM52003.2023.10252681" target=\"_blank\">"Distributed Multi-objective Control of Hybrid Microgrid in Autonomous Mode,"</a> <em>2023 IEEE Power & Energy Society General Meeting (PESGM)</em>, Orlando, FL, USA, 2023, pp. 1-5.</li>
+			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/PEDES56012.2022.10080482" target=\"_blank\">"Interlinking Converter Operation in Hybrid Microgrid As a Tie-line,"</a> <em>2022 IEEE International Conference on Power Electronics, Drives and Energy Systems (PEDES)</em>, Jaipur, India, 2022, pp. 1-6.</li>
+			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/PESGRE52268.2022.9715796" target=\"_blank\">"3ph qZSI Controller Design using PI for DC side and PR for AC side Controller including Droop Characteristic in standalone mode,"</a> <em>2022 IEEE International Conference on Power Electronics, Smart Grid, and Renewable Energy (PESGRE)</em>, Trivandrum, India, 2022, pp. 1-6.</li>
+			  <li>S. Agrawal, B. Tyagi, V. Kumar, P. Agarwal and P. Sharma, <a href="https://doi.org/10.1109/NAPS46351.2019.9000295" target=\"_blank\">"A Simplified and Effective GMPP Tracking Algorithm for Solar Photovoltaic System,"</a> <em>2019 North American Power Symposium (NAPS)</em>, Wichita, KS, USA, 2019, pp. 1-6.</li>
 			</ul>
         </div>
       </section>
 
-
- <!-- Awards -->
     <section id="awards">
       <div class="card">
         <div class="section-title">Awards & Achievements</div>
@@ -464,11 +447,6 @@
         </ul>
       </div>
     </section>
-
-
-
-
-
 
       <section id="skills">
         <div class="card">
@@ -514,12 +492,9 @@
         </div>
       </section>
 
-
- <!-- Position of Responsibility -->
     <section id="leadership">
       <div class="card">
         <div class="section-title">Entrepreneurial Experience & Leadership</div>
-		
 		<div class="entry-title">Co-founder – ATMGARAGE Technologies Pvt. Ltd.</div>
 		<div class="entry-meta">May 2016 – Sep 2019 · Early-stage Startup (Operations Concluded)</div>
 		<p class="entry-meta">Founded and led an early-stage technology startup focused on cost-effective vehicle service solutions and exploratory R&D in electric vehicle (EV) systems. The venture provided hands‑on exposure to entrepreneurship, product development, and business operations, contributing significantly to technical leadership and problem‑solving capabilities.</p>
@@ -530,74 +505,43 @@
               <li>Designed and maintained the company website and handled digital presence and updates.</li>
               <li>Startup formally recognized by the Department for Promotion of Industry and Internal Trade (DPIIT), Govt. of India (Certificate No. DIPP2082).</li>
 		</ul>
-		
-		
-		
       </div>
     </section>
 
-    <!-- Links -->
     <section id="links">
       <div class="card">
         <div class="section-title">My Open-Source Links</div>
 		<div class="grid">
-
-        <h2>Updating Soon... </h2>
-
-	
+         <h2>Updating Soon...</h2>
 		</div>
       </div>
     </section>
 
-
-
 	<footer style="text-align: center; color: var(--muted); padding-bottom: 2rem;">
-	  
 	  <div class="qr-footer">
-		<img
-		  src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://shwetankgit.github.io"
-		  alt="QR code linking to this website"
-		>
+		<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://shwetankgit.github.io" alt="QR code linking to this website">
 		<span>Scan to visit my portfolio</span>
 	  </div>
-
-	  <div style="margin-top: 1rem;">
-		© 2026 Shwetank Agrawal | Technology Enthusiast
-	  </div>
-
+	  <div style="margin-top: 1rem;">© 2026 Shwetank Agrawal | Technology Enthusiast</div>
 	</footer>
-
-
-     
     </main>
   </div>
   
   <div id="contactModal" class="contact-modal" onclick="closeContact()">
   <div class="contact-box" onclick="event.stopPropagation()">
     <div class="close-btn" onclick="closeContact()">✖</div>
-
-    <!-- GOOGLE FORM EMBED -->
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSflIhDLMSl3CDtGIfbQ3agn2mRmp6qCGf95u1boG_Y8buoZqw/viewform?embedded=true"
-            width="460" height="520" frameborder="0">
-    </iframe>
-	
-	
-	
-	
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSflIhDLMSl3CDtGIfbQ3agn2mRmp6qCGf95u1boG_Y8buoZqw/viewform?embedded=true" width="100%" height="520" frameborder="0"></iframe>
   </div>
 </div>
 
-  <script>
-function openContact() {
-  document.getElementById("contactModal").style.display = "block";
-}
-function closeContact() {
-  document.getElementById("contactModal").style.display = "none";
+<script>
+function openContact() { document.getElementById("contactModal").style.display = "block"; }
+function closeContact() { document.getElementById("contactModal").style.display = "none"; }
+function toggleSidebar() { 
+    if(window.innerWidth <= 900) {
+        document.getElementById("sidebar").classList.toggle("active");
+    }
 }
 </script>
-
-  
-  
 </body>
-
 </html>
