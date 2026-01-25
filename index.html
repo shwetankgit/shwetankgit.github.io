@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shwetank Agrawal | Research & Engineering Portfolio</title>
+   <meta name="description" content="ATS-optimized professional resume website showcasing education, experience, projects, research, publications, and achievements" />
+  <meta name="keywords" content="resume, portfolio, power system engineer, control engineer, researcher, projects, internships, industry experience, publications" />
+  <style>
+    :root {
+      --primary: #2563eb;
+      --bg: #f8fafc;
+      --sidebar: #0f172a;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --success: #16a34a;
+	  --accent: #2563eb;
+    }
+
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+    body { margin: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding-top: 56px; }
+    
+    .topbar { height: 56px; background: var(--primary); color: #fff; display: flex; align-items: center; padding: 0 1.5rem; font-weight: 700; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
+    .layout { display: grid; grid-template-columns: 260px 1fr; min-height: calc(100vh - 56px); }
+    
+    .sidebar { background: var(--sidebar); color: #e5e7eb; padding: 1.5rem 1rem; position: sticky; top: 56px; height: calc(100vh - 56px); overflow-y: auto; }
+    .sidebar a { display: block; padding: 0.7rem 1rem; border-radius: 8px; color: #9ca3af; text-decoration: none; font-size: 0.9rem; margin-bottom: 0.25rem; }
+    .sidebar a:hover { background: #1e293b; color: #fff; }
+
+    .content { padding: 2rem; max-width: 1200px; margin: 0 auto; }
+
+    header { display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; background: var(--card); padding: 2.5rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); margin-bottom: 2rem; }
+    .profile-pic { width: 130px; height: 130px; border-radius: 16px; object-fit: cover; border: 2px solid #e5e7eb; }
+    .header-info { flex: 1; min-width: 300px; }
+    .name { font-size: 2.4rem; font-weight: 800; margin: 0; color: var(--sidebar); }
+    .badge { background: #e0e7ff; color: #1e3a8a; padding: 0.3rem 0.7rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; margin-right: 5px; }
+    
+    .links { margin-top: 20px; display: flex; gap: 12px; }
+    .btn { text-decoration: none; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 600; font-size: 0.85rem; border: 1px solid #d1d5db; color: var(--text); }
+    .btn-primary { background: var(--primary); color: #fff; border: none; }
+
+    section { margin-bottom: 3rem; scroll-margin-top: 80px; }
+    .card { background: var(--card); border-radius: 16px; padding: 2rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .section-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; border-left: 4px solid var(--primary); padding-left: 12px; }
+
+    /* --- TIMELINE FIX: Continuous Scrolling Line --- */
+    .timeline-container { position: relative; overflow-x: auto; padding: 2rem 0; width: 100%; }
+    .timeline-wrapper { 
+      display: inline-flex; 
+      position: relative; 
+      min-width: 100%; 
+      padding-bottom: 1rem;
+    }
+
+    /* The continuous line: Tied to the width of the scrolling content */
+    .timeline-wrapper::before { 
+      content: ''; 
+      position: absolute; 
+      left: 0; 
+      top: 18px; /* Mid-point of the 36px icons */
+      width: 100%; 
+      height: 4px; 
+      background: #e2e8f0; 
+      z-index: 1;
+    }
+
+    .timeline-event { position: relative; width: 240px; text-align: center; z-index: 2; flex-shrink: 0; }
+    
+    .timeline-icon { 
+      width: 36px; height: 36px; background: #fff; 
+      border: 3px solid var(--primary); border-radius: 50%; 
+      display: flex; align-items: center; justify-content: center; 
+      margin: 0 auto 15px; font-size: 16px; position: relative; z-index: 3;
+    }
+    
+    .timeline-tag { font-size: 0.75rem; font-weight: 800; background: var(--sidebar); color: #fff; padding: 2px 10px; border-radius: 20px; display: inline-block; margin-bottom: 8px; }
+    .timeline-content { background: #f8fafc; padding: 1rem; border-radius: 12px; border: 1px solid #e2e8f0; margin: 0 10px; }
+    .timeline-content h4 { margin: 0; font-size: 0.95rem; color: var(--sidebar); }
+    .timeline-content p { margin: 5px 0 0; font-size: 0.8rem; color: var(--muted); }
+
+    .grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .item-card { border: 1px solid #f1f5f9; padding: 1.2rem; border-radius: 12px; }
+    ul { padding: 0; list-style: none; }
+    ul li { position: relative; padding-left: 1.5rem; margin-bottom: 0.6rem; }
+    ul li::before { content: "✔"; position: absolute; left: 0; color: var(--success); font-weight: 700; }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .timeline-wrapper { display: flex; flex-direction: column; }
+      .timeline-wrapper::before { left: 18px; top: 0; width: 4px; height: 100%; }
+      .timeline-event { width: 100%; text-align: left; margin-left: 45px; margin-bottom: 2rem; }
+      .timeline-icon { position: absolute; left: -45px; top: 0; margin: 0; }
+    }
+	
+	.tagline { color: var(--muted); }
+	
+	
+	/* Figure Style Entry (Industry & Education) */
+    .entry-title { font-size: 1.25rem; font-weight: 700; color: #000; margin-top: 1.5rem; margin-bottom: 4px; }
+    .entry-meta { font-size: 0.95rem; color: var(--muted); margin-bottom: 8px; }
+    .entry-label { font-size: 0.95rem; font-weight: 700; color: #6b7280; margin-bottom: 8px; }
+    
+    .check-list { list-style: none; padding: 0; margin-bottom: 2rem; }
+    .check-list li { position: relative; padding-left: 2rem; margin-bottom: 10px; font-size: 1rem; color: #374151; }
+    .check-list li::before { content: '✔'; position: absolute; left: 0; color: var(--success); font-weight: 900; }
+	
+	 a { color: var(--accent); text-decoration: none; }
+	
+	
+	.qr-footer {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.qr-footer img {
+  width: 90px;
+  height: 90px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 6px;
+  background: #ffffff;
+}
+
+.qr-footer span {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+	
+	/* ===== Contact Form */
+	.contact-btn {
+  margin-left: auto;
+  background: #fff;
+  color: #2563eb;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.contact-btn:hover {
+  background: #e0e7ff;
+}
+
+/* Modal */
+.contact-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 2000;
+}
+
+.contact-box {
+  background: #fff;
+  width: 480px;
+  max-width: 95%;
+  margin: 80px auto;
+  padding: 10px;
+  border-radius: 14px;
+}
+
+.close-btn {
+  text-align: right;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0 8px;
+}
+
+	
+	
+	
+  </style>
+</head>
+<body id="top">
+
+  <!--<div class="topbar"><a href="#top" style="color:#fff; text-decoration:none;">Shwetank Agrawal | Digital Professional Portfolio</a></div>-->
+  <div class="topbar">
+	  <a href="#top" style="color:#fff; text-decoration:none;">
+		Shwetank Agrawal | Digital Professional Portfolio
+	  </a>
+	  <button class="contact-btn" onclick="openContact()">Contact Me</button>
+  </div>
+
+  
+
+  <div class="layout">
+    <aside class="sidebar">
+      <a href="#top">About Me</a>
+      <a href="#timeline">Career Timeline</a>
+      <a href="#education">Education</a>
+      <a href="#experience">Experience</a>
+	  <a href="#training">Training</a>
+	  <a href="#projects">Projects</a>
+	  <a href="#research">Ph.D. Work</a>
+      <a href="#publications">Publications</a>
+      <a href="#awards">Awards</a>
+      <a href="#skills">Technical Skills</a>
+	  <a href="#leadership">Entrepreneurial Leadership</a>
+	  <a href="#links">Open-Source</a>
+    </aside>
+
+    <main class="content">
+      <header>
+        <img src="shwetank_pic.jpg" alt="Profile" class="profile-pic" />
+        <div class="header-info">
+          <h1 class="name">Shwetank Agrawal</h1>
+          <div class="tagline"><strong>Smart Grid Controls | DERs Integration | AGC</strong></div>
+          <div style="margin-top:10px;">
+            <span class="badge">Thesis Submitted</span>
+            <span class="badge" style="background:#dcfce7; color:#166534;">Seeking for Research & Industry Opportunities</span>
+          </div>
+          <div class="links">
+            <a href="https://www.linkedin.com/in/shwetank-agrawal/" target="_blank" class="btn">LinkedIn</a>
+			<a href="https://ieeexplore.ieee.org/author/37087994750" target="_blank" class="btn">IEEE Xplore</a>
+			<a href="https://orcid.org/0000-0002-6815-3869" target="_blank" class="btn">ORCID</a>
+            <a href="https://github.com/shwetankgit" target="_blank" class="btn">GitHub</a>
+            <a href="https://drive.google.com/file/d/1uBLFCdN9E7eiOdxA9MWMRh-f0i2ZOZiN/view?usp=sharing" class="btn btn-primary">Download CV</a>
+          </div>
+        </div>
+      </header>
+
+      <section id="about">
+        <div class="card">
+          <div class="section-title">About Me</div>
+          <p>Area of interest in power electronics converter design, microgrid operation and control, and renewable energy integration. My doctoral work focuses on virtual synchronous generator (VSG) based control for DERs in hybrid microgrids. Research interests include grid-forming, grid-feeding and grid-supporting inverter control, stability analysis, automatic generation control, and wind/solar energy systems. Hands-on experience with OPAL-RT real-time simulation, SIL/CHIL validation, and embedded controller implementation. Experienced in industry-oriented R&D through GE Vernova Advanced Research Center and DST-sponsored projects. My background includes a mix of academic rigor, industrial, and leadership.</p>
+        
+     
+		</div>
+      </section>
+
+      <section id="timeline">
+        <div class="card">
+          <div class="section-title">Career Timeline</div>
+          <div class="timeline-container">
+            <div class="timeline-wrapper">
+              <div class="timeline-event">
+                <div class="timeline-icon">🎓</div>
+                <div class="timeline-tag">Aug 2009 - May 2013</div>
+                <div class="timeline-content"><h4>B.Tech</h4><p>NIT Rourkela</p><p>4 Years</p></div>
+              </div>
+              <div class="timeline-event">
+                <div class="timeline-icon">🏭</div>
+                <div class="timeline-tag">Jan 2014 - Jul 2014</div>
+                <div class="timeline-content"><h4>GET</h4><p>JSW Steel Ltd.</p><p>6 Months</p></div>
+              </div>
+              <div class="timeline-event">
+                <div class="timeline-icon">🎓</div>
+                <div class="timeline-tag">Aug 2014 - May 2016</div>
+                <div class="timeline-content"><h4>M.Tech</h4><p>IIT (BHU) Varanasi</p><p>2 Years</p></div>
+              </div>
+              <div class="timeline-event">
+                <div class="timeline-icon">🚀</div>
+                <div class="timeline-tag">May 2016 - Sep 2019</div>
+                <div class="timeline-content"><h4>Co-founder</h4><p>ATMGARAGE Start-Up</p><p>3 Years 4 Months</p></div>
+              </div>
+              <div class="timeline-event">
+                <div class="timeline-icon">🔬</div>
+                <div class="timeline-tag">Oct 2018 - Jan 2022</div>
+                <div class="timeline-content"><h4>JRF</h4><p>IIT Roorkee (DST Project)</p><p>3 Years 2 Months</p></div>
+              </div>
+              <div class="timeline-event">
+                <div class="timeline-icon">🖋️</div>
+                <div class="timeline-tag">Jan 2019 - Dec 2025</div>
+                <div class="timeline-content"><h4>Ph.D. Scholar</h4><p>IIT Roorkee Research</p><p>7 Years</p></div>
+              </div>
+              <div class="timeline-event">
+                <div class="timeline-icon">⚡</div>
+                <div class="timeline-tag">Mar 2025 - Nov 2025</div>
+                <div class="timeline-content"><h4>Research Intern</h4><p>GE Vernova ARC</p><p>9 Months</p></div>
+              </div>
+              <div class="timeline-event">
+                <div class="timeline-icon">🔍</div>
+                <div class="timeline-tag">Current</div>
+                <div class="timeline-content"><h4>Looking Opportunities</h4><p>Thesis Defense Phase</p><p>Submitted Thesis</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="education">
+        <div class="card">
+          <div class="section-title">Education</div>
+          <div class="entry-title">Ph.D. (Electrical Engineering)</div>
+          <div class="entry-meta">IIT Roorkee · 2019 – 2025 || CGPA: 8.857/10</div>
+          <div><span class="entry-label">Thesis Title:</span> Operation and Control of VSG-Based DERs in Hybrid Microgrid</div>
+
+          <div class="entry-title">M.Tech (Power Systems)</div>
+          <div class="entry-meta">IIT (BHU) Varanasi · 2014 – 2016 || CGPA: 8.41/10</div>
+          <div><span class="entry-label">M.Tech Project:</span> Numerical Protection of Transmission Line Using Spectral Energy Scheme.</div>
+          
+          <div class="entry-title">B.Tech (Electrical Engineering)</div>
+          <div class="entry-meta">NIT Rourkela · 2009 – 2013 || CGPA: 8.66/10</div>
+          <div><span class="entry-label">B.Tech Project:</span> Load Flow Solution for Meshed Distribution Networks</div>
+         
+        </div>
+      </section>
+
+ <!-- Industry Experience -->
+    <section id="experience">
+        <div class="card">
+          <div class="section-title">Industry Experience <div class="entry-label">1 Year, 3 Months</div></div>
+
+          <div class="entry-title">Research Intern – Power Electronics & Power Systems</div>
+          <div class="entry-meta">GE Vernova Advanced Research Center, Bengaluru || Mar 2025 – Nov 2025</div>
+          <span class="entry-label">Key Responsibilities & Work:</span>
+          <ul class="check-list">
+            <li>Wind turbine uprating analysis and operating limit definition using D-curves and thermal margins.</li>
+            <li>Development and validation of Software-in-the-Loop (SIL) setups for wind turbine systems.</li>
+            <li>Enhancement of diagnostics for power converter control units.</li>
+          </ul>
+
+          <div class="entry-title">Graduate Engineer Trainee (GET)</div>
+          <div class="entry-meta">JSW Steel Limited, Dolvi, Mumbai || Jan 2014 – Jul 2014</div>
+          <span class="entry-label">Key Responsibilities & Work:</span>
+          <ul class="check-list">
+            <li>Site supervision and execution support for the Sinter Plant–2 project.</li>
+            <li>Design verification and technical comparison of electrical equipment used in plant installations.</li>
+          </ul>
+        </div>
+      </section>
+
+ <!-- Internships & Courses -->
+    <section id="training">
+      <div class="card">
+        <div class="section-title">Training</div>
+		  
+          <div class="entry-title">Training on S7-400 PLC</div>
+          <div class="entry-meta">Tata Steel Limited, Jamshedpur || May 2012 – Jul 2012</div>
+          <div><span class="entry-label">Summer Internship:</span> Development of competency-based PLC learning modules</div>
+			
+		  <div class="entry-title">Transmission & Distribution Training</div>
+          <div class="entry-meta">Odisha Power Transmission Corporation Ltd, Bhubaneswar || Dec 2011</div>
+          <div><span class="entry-label">Winter Training:</span> Study of transmission lines, substations, and switchyard equipment.</div>
+			
+		  <div class="entry-title">Industrial Automation using PLC</div>
+          <div class="entry-meta">Central Tool Room & Training Centre (CTTC), Bhubaneswar || May 2011</div>
+          <div><span class="entry-label">Summer Training:</span> Traning on PLC programming and interloack study</div>
+       
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <div class="card">
+        <div class="section-title">Projects</div>
+        
+		<div class="entry-title">Development of Digital Library for DSPs</div>
+		<div class="entry-meta">Self Project || Aug 2022 – Dec 2022</div>
+		<span class="entry-label">Project Outcome:</span>
+		<ul class="check-list">
+			<li>Control Library: AC Droop, Hybrid Droop, DC Droop, LPF, PR Controller, PI with anti-windup, AC-VSG, DC-VG.</li>
+			<li>Power Library: ABC_to_DQ0, DQ0_to_ABC, 3Ph_PLL_SRF, 3Ph_Power, RAMP Generator.</li>
+			<li>General Purpose Library: Update PWM, Update PWM with Limit, Data Frame Extraction from USART.</li>
+		</ul>
+
+		<div class="entry-title">DST-Sponsored Hybrid Microgrid Project (₹293 Lakh)</div>
+		<div class="entry-meta">SRIC – IIT Roorkee || Oct 2018 – Jan 2022 || <a href="https://iitr.ac.in/hmg/" target="_blank">Project Website</a></div>
+		<div><span class="entry-label">Role & Responsibilities:</span> Junior Research Fellow (JRF)</div>
+		<ul class="check-list">
+			<li>Hybrid Microgrid laboratory setup at the Electrical Engineering Department, IIT Roorkee.</li>
+            <li>PCB design for gate drivers, sensor boards, and trip circuits.</li>
+            <li>Design and implementation of power electronic converters.</li>
+            <li>Installation, integration, and testing of electrical components and subsystems.</li>
+		</ul>
+        
+      </div>
+    </section>
+
+    <!-- PhD Work -->
+    <section id="research">
+      <div class="card">
+        <div class="section-title">Ph.D. Research Work</div>
+        
+		<div class="entry-title">Interlinking Converter Control in Hybrid Microgrid</div>
+		<ul class="check-list">
+			<li>Identifying the behavior of interlinking converter in hybrid Microgrid and it’s similarly with the tie-line connected between two area power system network.</li>
+			<li>Control of parallel operated interlinking converter connected between the AC and DC buses.</li>
+			<li>Controller Hardware-in-loop (CHIL) testing between STM32-F446RE microcontroller and Opal-RT to verify the parallel operated interlinking converter.</li>
+			<li>Improved power balance between AC and DC sub-grids through enhanced hybrid and inverses Q-V droop control with verification through MATLAB simulation.</li>
+			<li>Dual virtual inertia control (DVIC) for the interlinking converter to improve the ROCOF and ROCOV in the hybrid Microgrid and validated by MATLAB simulation.</li>
+		</ul>
+
+		<div class="entry-title">Centralized Control of Hybrid Microgrid</div>
+		<ul class="check-list">
+			<li>Modeling and stability of generalized hybrid Microgrid with hierarchical control consisting of primary and secondary control.</li>
+			<li>Primary control includes the droop control whereas the secondary control includes centralized control for frequency and PCC bus voltages restoration. </li>
+			<li>Validation of the control through simulation and verification with CHIL along with use of UART protocol for communication.</li>
+		</ul>
+
+		<div class="entry-title">Distributed Control of Hybrid Microgrid</div>
+		<ul class="check-list">
+			<li>Distributed Multi-objective Control of Hybrid Microgrid in Autonomous Mode with verification through MATLAB simulations.</li>
+			<li>Modeling and stability of the generalized hybrid Microgrid with distributed secondary control along with the validation with CHIL and UART protocol for communication.</li>
+		</ul>
+
+		<div class="entry-title">Frequency Regulation in Grid-Connected DFIG-Based Wind Turbines</div>
+		<ul class="check-list">
+			<li>FO-VSG control for grid connected DFIG-Based Wind Turbines to improve ROCOF and frequency nadir. Validations are performed through MATLAB simulation.</li>
+			<li>Enhancing Grid Stability through Adaptive Damping and Inertia Control in DFIG-Based Wind Turbine with Vsync along with validation through MATLAB simulation.</li>
+		</ul>
+
+		<div class="entry-title">Improved GMPP Tracking in Solar PV under Partial Shading</div>
+		<ul class="check-list">
+			<li>An effective way of tracking the global maximum power point (GMPP) tracking under partial shading condition and verification through MATLAB simulation.</li>
+			<li>The improvements are performed by identifying the GMPP region in Solar PV characteristics.</li>
+		</ul>
+      
+      </div>
+    </section>
+
+
+
+
+
+      <section id="publications">
+        <div class="card">
+          <div class="section-title">Publications</div>
+          <h4>Journals/Transactions</h4>
+			<ul>
+			
+			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/TIA.2025.3584037" target="_blank">"Enhancing Transient Response of Grid Connected DFIG-WT Through Adaptive Inertia and Damping Control With Virtual Synchronous,"</a> in<em> IEEE Transactions on Industry Applications</em>, vol. 62, no. 1, pp. 110-119, Jan.-Feb. 2026.</li>
+			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/TIA.2025.3546205" target="_blank">"Operation and Control of Parallel-Operated Interlinking Converter in Hybrid Microgrid,"</a> in <em>IEEE Transactions on Industry Applications</em>, vol. 61, no. 4, pp. 5660-5669, July-Aug. 2025.</li>
+			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/TIA.2023.3320120" target="_blank">"Digital Controller Design and Implementation for AC and DC Side of 3ph qZSI,"</a> in <em>IEEE Transactions on Industry Applications</em>, vol. 60, no. 1, pp. 672-683, Jan.-Feb. 2024.</li>
+
+			
+	 
+			</ul>
+			<h4>Conferences</h4>
+			<ul>
+			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/PEDES61459.2024.10960845" target="_blank">"Dual Virtual Inertia Control of Interlinking Converter in Hybrid Microgrid,"</a> <em>2024 IEEE International Conference on Power Electronics, Drives and Energy Systems (PEDES)</em>, Mangalore, India, 2024, pp. 1-5.</li>
+			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/ISGTEUROPE62998.2024.10863266" target="_blank">"Interlinking Converter Operation with Enhanced Hybrid and Inverse Q–V Droop,"</a> <em>2024 IEEE PES Innovative Smart Grid Technologies Europe (ISGT EUROPE)</em>, Dubrovnik, Croatia, 2024, pp. 1-5.</li>
+			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/PESGM51994.2024.10689033" target="_blank">"Enhancing Frequency Regulation in DFIG-Based Wind Turbines with FO-VSG,"</a> <em>2024 IEEE Power & Energy Society General Meeting (PESGM)</em>, Seattle, WA, USA, 2024, pp. 1-5.</li>
+			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/ETFG55873.2023.10407858" target="_blank">"Enhancing Grid Stability through Adaptive Damping and Inertia Control in DFIG-Based Wind Turbines with VSync,"</a> <em>2023 IEEE International Conference on Energy Technologies for Future Grids (ETFG)</em>, Wollongong, Australia, 2023, pp. 1-5.</li>
+			  <li>S. Agrawal, U. Malik, Y. Tripathy, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/PESGM52003.2023.10252681" target="_blank">"Distributed Multi-objective Control of Hybrid Microgrid in Autonomous Mode,"</a> <em>2023 IEEE Power & Energy Society General Meeting (PESGM)</em>, Orlando, FL, USA, 2023, pp. 1-5.</li>
+			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/PEDES56012.2022.10080482" target="_blank">"Interlinking Converter Operation in Hybrid Microgrid As a Tie-line,"</a> <em>2022 IEEE International Conference on Power Electronics, Drives and Energy Systems (PEDES)</em>, Jaipur, India, 2022, pp. 1-6.</li>
+			  <li>S. Agrawal, B. Tyagi, V. Kumar and P. Sharma, <a href="https://doi.org/10.1109/PESGRE52268.2022.9715796" target="_blank">"3ph qZSI Controller Design using PI for DC side and PR for AC side Controller including Droop Characteristic in standalone mode,"</a> <em>2022 IEEE International Conference on Power Electronics, Smart Grid, and Renewable Energy (PESGRE)</em>, Trivandrum, India, 2022, pp. 1-6.</li>
+			  <li>S. Agrawal, B. Tyagi, V. Kumar, P. Agarwal and P. Sharma, <a href="https://doi.org/10.1109/NAPS46351.2019.9000295" target="_blank">"A Simplified and Effective GMPP Tracking Algorithm for Solar Photovoltaic System,"</a> <em>2019 North American Power Symposium (NAPS)</em>, Wichita, KS, USA, 2019, pp. 1-6.</li>
+			</ul>
+        </div>
+      </section>
+
+
+ <!-- Awards -->
+    <section id="awards">
+      <div class="card">
+        <div class="section-title">Awards & Achievements</div>
+        <ul>
+          <li>COMET’25 Poster Presentation – <strong>1st Runner-up</strong>, IIT Roorkee.</li>
+          <li>IEEE PEDES 2024 – <strong>Som Nath Mahendra Memorial STA Award</strong>.</li>
+          <li>Hackathon – <strong>1st Runner-up</strong>, Power System Cybersecurity 2024, hosted by WRD&M, IIT Roorkee in collaboration with CFDE, iHUB DivyaSampark, IIT Roorkee, and THDC India Limited.</li>
+          <li><strong>International Travel Support (ITS) Grant</strong> awarded by Anusandhan National Research Foundation (ANRF), formerly SERB, DST, Govt. of India, to attend IEEE PES ISGT Europe 2024 Conference, Croatia.</li>
+          <li><strong>Best Conference Paper submission</strong> – IEEE PES General Meeting 2023.</li>
+          <li><strong>GATE All India Rank (AIR)</strong>: 617 (2014), 1295 (2013).</li>
+          <li><strong>1st Position</strong> in Circuit-O-Spice (EED) Event at Annual Techno‑Management Fest 2011, NIT Rourkela.</li>
+          <li><strong>2nd Position</strong> in SETU at Annual Techno‑Management Fest 2011, NIT Rourkela.</li>
+        </ul>
+      </div>
+    </section>
+
+
+
+
+
+
+      <section id="skills">
+        <div class="card">
+			<div class="section-title">Technical Skills</div>
+			<p><span class="entry-label">Programming Languages</span>
+			<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+				<span class="badge">MATLAB Scripting</span>
+				<span class="badge"> C/C++</span>
+				<span class="badge">Python</span>
+				<span class="badge">Ladder logic</span>
+				<span class="badge">Verilog-Basic</span>
+			</div></p>
+			<p><span class="entry-label">Software Packages</span>
+			<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+				<span class="badge">MATLAB/Simulink</span>
+				<span class="badge">RT-LAB</span>
+				<span class="badge">PSCAD</span>
+				<span class="badge">PSSE</span>
+				<span class="badge">CCS</span>
+				<span class="badge">STM32CubeIDE</span>
+				<span class="badge">ArduinoIDE</span> 
+				<span class="badge">LTSpice</span> 
+				<span class="badge">PCB Design KiCAD</span> 
+				<span class="badge">LabView</span> 
+            </div></p>
+			<p><span class="entry-label">Controllers</span>
+			<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+				<span class="badge">TI-C2000</span>
+				<span class="badge">STM32-F446RE</span>
+				<span class="badge">OPAL-RT</span>
+				<span class="badge"> dSPACE</span>
+				<span class="badge">Arduino</span>
+				<span class="badge"> S7-400 PLC</span>
+				<span class="badge">NI-DAQ</span>
+            </div></p>
+			<p><span class="entry-label">Communication</span>
+			<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+				<span class="badge">UART</span>
+				<span class="badge">SPI</span>
+				<span class="badge">Modbus Protocol</span>
+				<span class="badge">IEC 61850 Standard</span>
+            </div></p>
+        </div>
+      </section>
+
+
+ <!-- Position of Responsibility -->
+    <section id="leadership">
+      <div class="card">
+        <div class="section-title">Entrepreneurial Experience & Leadership</div>
+		
+		<div class="entry-title">Co-founder – ATMGARAGE Technologies Pvt. Ltd.</div>
+		<div class="entry-meta">May 2016 – Sep 2019 · Early-stage Startup (Operations Concluded)</div>
+		<p class="entry-meta">Founded and led an early-stage technology startup focused on cost-effective vehicle service solutions and exploratory R&D in electric vehicle (EV) systems. The venture provided hands‑on exposure to entrepreneurship, product development, and business operations, contributing significantly to technical leadership and problem‑solving capabilities.</p>
+		<ul class="check-list">
+			<li>Led research and exploratory development activities related to EV systems and service optimization.</li>
+              <li>Engaged directly with customers to identify real world technical and operational challenges and translate them into actionable solutions.</li>
+              <li>Managed company operations including financial planning, account handling, and regulatory compliance.</li>
+              <li>Designed and maintained the company website and handled digital presence and updates.</li>
+              <li>Startup formally recognized by the Department for Promotion of Industry and Internal Trade (DPIIT), Govt. of India (Certificate No. DIPP2082).</li>
+		</ul>
+		
+		
+		
+      </div>
+    </section>
+
+    <!-- Links -->
+    <section id="links">
+      <div class="card">
+        <div class="section-title">My Open-Source Links</div>
+		<div class="grid">
+
+        <h2>Updating Soon... </h2>
+
+	
+		</div>
+      </div>
+    </section>
+
+
+
+	<footer style="text-align: center; color: var(--muted); padding-bottom: 2rem;">
+	  
+	  <div class="qr-footer">
+		<img
+		  src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://shwetankagrawal.github.io"
+		  alt="QR code linking to this website"
+		>
+		<span>Scan to visit my portfolio</span>
+	  </div>
+
+	  <div style="margin-top: 1rem;">
+		© 2026 Shwetank Agrawal | Technology Enthusiast
+	  </div>
+
+	</footer>
+
+
+     
+    </main>
+  </div>
+  
+  <div id="contactModal" class="contact-modal" onclick="closeContact()">
+  <div class="contact-box" onclick="event.stopPropagation()">
+    <div class="close-btn" onclick="closeContact()">✖</div>
+
+    <!-- GOOGLE FORM EMBED -->
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSflIhDLMSl3CDtGIfbQ3agn2mRmp6qCGf95u1boG_Y8buoZqw/viewform?embedded=true"
+            width="460" height="520" frameborder="0">
+    </iframe>
+	
+	
+	
+	
+  </div>
+</div>
+
+  <script>
+function openContact() {
+  document.getElementById("contactModal").style.display = "block";
+}
+function closeContact() {
+  document.getElementById("contactModal").style.display = "none";
+}
+</script>
+
+  
+  
+</body>
+</html>
