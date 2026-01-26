@@ -3,9 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shwetank Agrawal | Research & Engineering Portfolio</title>
-     <meta name="description" content="ATS-optimized professional resume website showcasing education, experience, projects, research, publications, and achievements" />
-  <meta name="keywords" content="resume, portfolio, power system engineer, control engineer, researcher, projects, internships, industry experience, publications" />
+  <title>Shwetank Agrawal | Research & Engineering Digital Portfolio</title>
+  <meta name="description" content="Digital Portfolio webpage showcasing education, experience, projects, research, publications, and achievements" />
+  <meta name="keywords" content="resume, portfolio, power system engineer, control engineer, researcher, projects, internships, industry experience, publications, technical skills" />
+  
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WJ8T2Z98P1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WJ8T2Z98P1');
+</script>
+  
+  
   <style>
     :root {
       --primary: #2563eb;
@@ -128,8 +140,8 @@
 }
 
 .qr-footer img {
-  width: 90px;
-  height: 90px;
+  width: 200px;
+  height: 200px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   padding: 6px;
@@ -188,7 +200,7 @@
   <div class="topbar">
       <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
 	  <a href="#top" style="color:#fff; text-decoration:none;">
-		Shwetank Agrawal | Digital Professional Portfolio
+		Shwetank Agrawal | Digital Portfolio
 	  </a>
 	  <button class="contact-btn" onclick="openContact()">Contact Me</button>
   </div>
@@ -232,7 +244,8 @@
       <section id="about">
         <div class="card">
           <div class="section-title">About Me</div>
-          <p>Area of interest in power electronics converter design, microgrid operation and control, and renewable energy integration. My doctoral work focuses on virtual synchronous generator (VSG) based control for DERs in hybrid microgrids. Research interests include grid-forming, grid-feeding and grid-supporting inverter control, stability analysis, automatic generation control, and wind/solar energy systems. Hands-on experience with OPAL-RT real-time simulation, SIL/CHIL validation, and embedded controller implementation. Experienced in industry-oriented R&D through GE Vernova Advanced Research Center and DST-sponsored projects. My background includes a mix of academic rigor, industrial, and leadership.</p>
+          <p>My expertise span on power electronics–based converter design, microgrid control, control of wind/solar energy systems, and renewable energy integration. During my doctoral research, I developed VSG-based control solutions for DERs in hybrid microgrids, addressing grid-forming, grid-feeding, and grid-supporting inverter operation, system stability, and automatic generation control. I have hands-on experience in OPAL-RT real-time simulation, SIL/CHIL testing, and embedded controller implementation. Experienced in industry-oriented R&D through GE Vernova Advanced Research Center and DST-sponsored projects. My background includes a mix of academic rigor, industrial, and leadership.</p>
+		
 		</div>
       </section>
 
@@ -313,7 +326,7 @@
           <ul class="check-list">
             <li>Wind turbine uprating analysis and operating limit definition using D-curves and thermal margins.</li>
             <li>Development and validation of Software-in-the-Loop (SIL) setups for wind turbine systems.</li>
-            <li>Enhancement of diagnostics for power converter control units.</li>
+            <li>Enhancement of diagnostics for power converter control units: Communcation between FPGA and GE MARKSAT Controller, DFT Analysis. </li>
           </ul>
 
           <div class="entry-title">Graduate Engineer Trainee (GET)</div>
@@ -442,7 +455,7 @@
           <li><strong>International Travel Support (ITS) Grant</strong> awarded by Anusandhan National Research Foundation (ANRF), formerly SERB, DST, Govt. of India, to attend IEEE PES ISGT Europe 2024 Conference, Croatia.</li>
           <li><strong>Best Conference Paper submission</strong> – IEEE PES General Meeting 2023.</li>
           <li><strong>GATE All India Rank (AIR)</strong>: 617 (2014), 1295 (2013).</li>
-          <li><strong>1st Position</strong> in Circuit-O-Spice (EED) Event at Annual Techno‑Management Fest 2011, NIT Rourkela.</li>
+          <li><strong>1st Position</strong> in Circuit-O-Spice (EED) Event at Annual Techno-Management Fest 2011, NIT Rourkela.</li>
           <li><strong>2nd Position</strong> in SETU at Annual Techno‑Management Fest 2011, NIT Rourkela.</li>
         </ul>
       </div>
@@ -458,6 +471,8 @@
 				<span class="badge">Python</span>
 				<span class="badge">Ladder logic</span>
 				<span class="badge">Verilog-Basic</span>
+				<span class="badge">HTML/CSS</span>
+				<span class="badge">Javascript-Basic</span>
 			</div></p>
 			<p><span class="entry-label">Software Packages</span>
 			<div style="display: flex; flex-wrap: wrap; gap: 10px;">
@@ -519,7 +534,7 @@
 
 	<footer style="text-align: center; color: var(--muted); padding-bottom: 2rem;">
 	  <div class="qr-footer">
-		<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://shwetankgit.github.io" alt="QR code linking to this website">
+		<img src="./qrcode_200px.png"  alt="https://shwetankgit.github.io/">
 		<span>Scan to visit my portfolio</span>
 	  </div>
 	  <div style="margin-top: 1rem;">© 2026 Shwetank Agrawal | Technology Enthusiast</div>
